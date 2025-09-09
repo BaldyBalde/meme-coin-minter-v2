@@ -166,3 +166,172 @@ a.secondary {
     filter: invert();
   }
 }
+
+/* =====================
+   MemeCoin Minter UI v2
+   Structured, reusable styles to replace inline CSS
+   ===================== */
+
+/* Page wrapper for the minter (apply to a top-level div) */
+.minter {
+  min-height: 100svh;
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(85,27,249,.20), transparent 60%),
+              radial-gradient(1000px 600px at 90% 10%, rgba(85,27,249,.12), transparent 60%),
+              var(--bg);
+  color: var(--text);
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: saturate(120%) blur(6px);
+  background: linear-gradient(180deg, rgba(13,15,26,.68), rgba(13,15,26,.45) 60%, rgba(13,15,26,0));
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.headerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand {
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+
+/* Nav buttons (Mint / Volume Bot) */
+.nav {
+  display: flex;
+  gap: 12px;
+}
+.btn {
+  --_bg: transparent;
+  --_fg: var(--text);
+  --_bd: rgba(255,255,255,.14);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid var(--_bd);
+  background: var(--_bg);
+  color: var(--_fg);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .2px;
+  box-shadow: 0 0 0 0 var(--ring);
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .08s ease;
+}
+.btn:hover { border-color: rgba(255,255,255,.28); }
+.btn:active { transform: translateY(1px); }
+
+.btnPrimary {
+  --_bg: linear-gradient(90deg, var(--accent), var(--accent-600));
+  --_bd: transparent;
+}
+.btnPrimary:hover {
+  --_bg: linear-gradient(90deg, var(--accent-600), var(--accent));
+  box-shadow: 0 10px 24px rgba(85,27,249,.25);
+}
+
+/* Panel / Card */
+.card {
+  max-width: 1120px;
+  margin: 48px auto;
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)), var(--panel);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+.cardHeader { font-size: 22px; font-weight: 700; margin-bottom: 18px; }
+
+/* Two-column grid inside the card */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 28px;
+}
+.left, .right { display: grid; gap: 16px; align-content: start; }
+
+/* Input groups */
+.inputGroup { display: grid; gap: 8px; }
+.label { font-size: 13px; color: var(--muted); }
+.input, .textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: var(--panel-2);
+  color: var(--text);
+  padding: 14px 14px;
+  outline: none;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+.input:focus, .textarea:focus { border-color: rgba(255,255,255,.22); box-shadow: 0 0 0 4px var(--ring); }
+.textarea { min-height: 120px; resize: vertical; }
+
+/* File button */
+.fileBtn {
+  --_bg: transparent;
+  --_fg: var(--text);
+  --_bd: rgba(255,255,255,.14);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid var(--_bd);
+  background: var(--_bg);
+  color: var(--_fg);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: .2px;
+  box-shadow: 0 0 0 0 var(--ring);
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .08s ease;
+}
+
+/* Primary call-to-action */
+.ctaRow { display: flex; justify-content: flex-start; margin-top: 6px; }
+.btnMint { composes: btn btnPrimary; min-width: 160px; height: 44px; font-size: 15px; }
+
+/* Settings column */
+.settingCard {
+  background: var(--panel-2);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.settingTitle { font-weight: 700; }
+.settingDesc { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+/* Toggle switch */
+.toggle {
+  --w: 56px; --h: 16px; --knob: 24px;
+  position: relative; width: var(--w); height: var(--h);
+  border-radius: 999px; background: #2b2f42; border: 1px solid rgba(255,255,255,.08);
+  transition: background .2s ease, border-color .2s ease;
+}
+.toggleKnob {
+  position: absolute; top: 50%; left: 0;
+  transform: translate(4px,-50%);
+  width: var(--knob); height: var(--knob);
+  border-radius: 999px; background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+  transition: transform .2s ease, background .2s ease;
+}
+.toggleActive { background: linear-gradient(90deg, var(--accent), var(--accent-600)); border-color: transparent; }
+.toggleActive .toggleKnob { transform: translate(calc(var(--w) - var(--knob) - 4px), -50%); background: #fff; }
+
+/* Helper utilities */
+.center { display: grid; place-items: center; }
+.hidden { display: none; }
+
+/* Responsive */
+@media (max-width: 1024px) { .grid { grid-template-columns: 1fr; } }
